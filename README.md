@@ -1,1 +1,1 @@
-# [https://mind-gpt.online](https://mind-gpt.online)
+# [https://www.mind-gpt.online](https://www.mind-gpt.online)

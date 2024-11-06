@@ -18,7 +18,8 @@ export const handleLogin = async (c: Context<{}, any, {}>) => {
 
     let redirectUrl = ""
 
-    const { GOOGLE_CLIENT_ID, SERVICE_URL } = env<typeof Env>(c)
+    const { GOOGLE_CLIENT_ID } = env<typeof Env>(c)
+    const SERVICE_URL = "https://auth.mind-gpt.online"
 
     switch (providersMap[provider]) {
         case Provider.GOOGLE:
@@ -51,12 +52,13 @@ export const handleGoogleCallback = async (c: Context<{}, any, {}>) => {
     const {
         GOOGLE_CLIENT_ID,
         GOOGLE_CLIENT_SECRET,
-        SERVICE_URL,
+        // SERVICE_URL,
         SUPABASE_URL,
         SUPABASE_KEY,
         JWT_SECRET,
     } = env<typeof Env>(c)
 
+    const SERVICE_URL = "https://auth.mind-gpt.online"
     const { user }: { user: GoogleUser } = await google.users({
         options: {
             clientSecret: GOOGLE_CLIENT_SECRET,

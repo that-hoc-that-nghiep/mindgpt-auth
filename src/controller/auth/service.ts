@@ -26,7 +26,7 @@ export const handleLogin = async (c: Context<{}, any, {}>) => {
             redirectUrl = await google.redirect({
                 options: {
                     clientId: GOOGLE_CLIENT_ID,
-                    redirectTo: `${SERVICE_URL}/callback`,
+                    redirectUrl: `${SERVICE_URL}/callback`,
                     state: redirectAfterLogin,
                 },
             })
@@ -59,7 +59,7 @@ export const handleGoogleCallback = async (c: Context<{}, any, {}>) => {
     } = env<typeof Env>(c)
 
     // const SERVICE_URL = "https://auth.mind-gpt.online"
-    const { user }: { user: GoogleUser } = await google.users({
+    const { user } = await google.users({
         options: {
             clientSecret: GOOGLE_CLIENT_SECRET,
             clientId: GOOGLE_CLIENT_ID,
@@ -74,7 +74,7 @@ export const handleGoogleCallback = async (c: Context<{}, any, {}>) => {
     const data = await getUser(user.email, sp)
 
     if (!data || data.length === 0) {
-        const { data: newData } = await createUser(user, sp)
+        const { data: newData } = await createUser(user as GoogleUser, sp)
         userData = newData![0]
     } else {
         userData = data![0]
